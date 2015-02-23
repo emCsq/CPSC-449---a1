@@ -6,7 +6,8 @@ public class parser extends Commands {
 
 	public static void main (String [] args){
     
-		Scanner input = new Scanner(System.in);
+		Scanner input = new Scanner(System.in);		
+		char[] inputAsArray;
 
 		if (args.length == 0) {
 			printOut();
@@ -18,7 +19,23 @@ public class parser extends Commands {
 			printOut();
 		} else if (args[0].equals("-v") || args[0].equals("--verbose")) {
 			System.out.println("SOMETHING TO DO LATER ON");
-		}  
+			/*
+			check if the args[1] (aka the jar file) is valid
+				if valid, check if the args[2] (aka the class) is valid
+					if args[2] is valid, ~ENTER COMPILER PROGRAM~
+					if invalid, error message and printOut().
+				if invalid, error message and printOut(). 
+			*/
+		} else {
+			inputAsArray = args[0].toCharArray();
+			if (Character.valueOf(inputAsArray[0]) == '-') {
+				System.out.println("Unrecognized qualifier '" + inputAsArray[1] + "' in '" + args[0] + "'");
+				printOut();
+			} else {
+				System.out.println("Unrecognized qualifier '" + inputAsArray[0] + "' in '" + args[0] + "'");
+				printOut();
+			}
+		}
 		
     }
     
