@@ -89,6 +89,15 @@ public class parser extends Commands {
 	}
 		
 	public static void nonFatalError() {
+		// whatever is enclosed by the <>, will be changed later once we get the logic to do so
+		// will update for the future 
+		System.out.println("Matching function for <function type> not found at offset <offset-number>\n"
+				+ "<specific function>\n"
+				+ "-----------^\n"
+				+ "\n java.text.ParseException: Matching function for <function type> not found\n"
+				+ "\t at Excecution.execute(Execution)"
+				+ "\t at Method.<init>(Method)"
+				+ "\t at Method.main(Methods.blah)");
 		return; 
 	}
 }
