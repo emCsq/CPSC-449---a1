@@ -19,18 +19,28 @@ public class parser extends Commands {
 			synopsis();
 		} else if (args[0].equals("-v") || args[0].equals("--verbose")) {
 			System.out.println("SOMETHING TO DO LATER ON");			//TEMPORARY
-			if (true) {			/* the args[1] (aka the jar file) is valid */
-				if (true) {		/* valid, check if the args[2] (aka the class) is valid */
-					/* if args[2] is valid, ~ENTER COMPILER PROGRAM~
-					MORE TO DO HERE!! */
-				} else {
-					System.out.println("Could not find class: '" + inputAsArray[2]);
-					synopsis();
-				}
-			} else {
-				System.out.println("Could not find jar file: '" + inputAsArray[1]);
-				synopsis();
-			}
+			if (true) {	/* the args[1] (aka the jar file) is valid 
+					IDEA
+					-What we need to do here is to check to see if the file is a jar file that is runnable
+					-Might need to match the .jar file to the existing file in the directory
+					-Right now this checks if it is a file in general
+					
+					if (args[1].isFile())
+					*/
+				if (true) {	/* valid, check if the args[2] (aka the class) is valid
+						IDEA
+						-This should test if the Class given as an argument is a Class derived 
+						from the class we are running, I specified parser below, but I think that wrong.
+						-Not sure if this is the correct means of checking if its a valid class
+						-Like I discussed with Emily earlier, we need to figure out a way to 
+						search for the existing class/className and then match that to the class name
+						that was put through as an argument, then use that case as our valid if statement
+						
+						if (args[2].getClass().isInstance(parser.class)) { 
+							args[2].doStuffHere();
+						}
+						MORE TO DO HERE!!
+						*/
 		} else {
 			inputAsArray = args[0].toCharArray();
 			if (Character.valueOf(inputAsArray[0]) == '-') {
