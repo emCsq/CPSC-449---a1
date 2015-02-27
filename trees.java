@@ -37,10 +37,26 @@ public class Trees {
 		}
 	}
 	
-	public boolean isChar(String a){
+	public boolean isChar(char a){
+		if (Character.isDefined(a)){
+			return true;
+		}
 		return false;
 	}
 	
+	public boolean isString(String a){
+		char[] s = a.toCharArray();
+		if ((s[0] == '\"') && (s[a.length()] == '\"')){
+			for (int i = 0; i<=a.length(); i++) {
+				if (!isChar(s[i])){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	//PENDING TO DO ! 
 	public boolean whiteSpace(String a){
 		String pattern = "^[''\t]*$";
 			if (a.matches(pattern)){
@@ -48,4 +64,6 @@ public class Trees {
 			}
 			return false;
 	}
+	
+	
 }
