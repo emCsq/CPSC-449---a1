@@ -64,16 +64,6 @@ public class parser extends Commands {
 		return;
 	}
 	
-	public static void helpCommandLine() {
-		System.out.println("Synopsis:\n  methods\n  methods { -h | -? | --help }+\n  methods {-v --verbose}* <jar-file> [<class-name>]"
-				+ "Arguments:\n  <jar-file>:   The .jar file that contains the class to load (see next line).\n  <class-name>: The fully qualified class name containing public static command methods to call. [Default=\"Commands\"]"
-				+ "Qualifiers:\n  -v --verbose: Print out detailed errors, warnings, and tracking.\n  -h -? --help: Print out a detailed help message."
-				+ "Single-char qualifiers may be grouped; long qualifiers may be truncated to unique prefixes and are not case sensitive.\n"
-				+ "\nThis program interprets commands of the format '(<method> {arg}*)' on the command line, finds corresponding"
-				+ "methods in <class-name>, and executes them, printing the result to sysout");
-		return;
-	}
-	
 	public static void functions() {
 		System.out.println("Function List:\n"
 				+ "(add string string) : string\n"
