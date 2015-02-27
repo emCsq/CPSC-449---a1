@@ -1,7 +1,6 @@
-
 public class Trees {
 
-	public Boolean sign(char a) {
+	public boolean sign(char a) {
 		
 		if (a == '+'){
 			return true;
@@ -12,7 +11,7 @@ public class Trees {
 		}
 	}
 		
-	public Boolean digit(String a) {
+	public boolean digit(String a) {
 		String pattern = "^[0-9]*$";
 			if (a.matches(pattern)){
 				return true;
@@ -21,7 +20,7 @@ public class Trees {
 	}
 	
 	//https://tr.im/VMTsA
-	public Boolean alpha(String a) {
+	public boolean alpha(String a) {
 		String pattern = "^[_a-zA-z]*$";
 			if (a.matches(pattern)){
 				return true;
@@ -29,12 +28,21 @@ public class Trees {
 			return false;	
 	}
 	
-	//https://tr.im/VMTsA
 	public boolean alphaNum(String a){
-		String pattern = "^[a-zA-Z0-9]*$";
-			if(a.matches(pattern)){
+		if (digit(a)){
+			return true; 
+		} else if (alpha(a)){
+			return true;
+		} else {
+			return false; 
+		}
+	}
+	
+	public boolean whiteSpace(String a){
+		String pattern = "^[''   ]*$";
+			if (a.matches(pattern)){
 				return true;
 			}
-			return false; 
+			return false;
 	}
 }
