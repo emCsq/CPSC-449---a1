@@ -2,11 +2,12 @@ import java.util.*;
 import java.lang.*;
 import java.text.*;
 
-public class parser extends Commands {
+public class parser {
 
 	public static void main (String [] args){
     
-		Scanner input = new Scanner(System.in);		
+		Scanner input = new Scanner(System.in);	
+		main mainStuff = new main();
 		char[] inputAsArray;
 
 		if (args.length == 0) {
@@ -20,9 +21,10 @@ public class parser extends Commands {
 		} else if (args[0].equals("-v") || args[0].equals("--verbose")) {
 			System.out.println("SOMETHING TO DO LATER ON");			//TEMPORARY
 			if (true) {			/* the args[1] (aka the jar file) is valid */
-				if (true) {		/* valid, check if the args[2] (aka the class) is valid */
+				if (true) {			/* valid, check if the args[2] (aka the class) is valid */
 					/* if args[2] is valid, ~ENTER COMPILER PROGRAM~
 					MORE TO DO HERE!! */
+					mainStuff.mainMenu();
 				} else {
 					System.out.println("Could not find class: '" + inputAsArray[2]);
 					synopsis();
@@ -44,18 +46,7 @@ public class parser extends Commands {
 		
     }
 	
-	public static void startUp() {
-		//this is the additional last paragraph
-		System.out.println("q \t : Quit the program.\n"
-				+ "v \t : Toggle verbose mode (stack traces).\n"
-				+ "f \t : List all known functions.\n"
-				+ "? \t : Print this helpful text.\n"
-				+ "<expression>: Evaluate the expression."
-				+ "Expressions can be integers, floats, strings (surrounded in double quotes) or function\n"
-				+ "calls of the form '(identifier {expression}*)'");
-		return;
-	} 
-    
+
 	public static void synopsis() {
 		System.out.println("Synopsis:\n  methods\n  methods { -h | -? | --help }+\n  methods {-v --verbose}* <jar-file> [<class-name>]");
 		System.out.println("Arguments:\n  <jar-file>:   The .jar file that contains the class to load (see next line).\n  <class-name>: The fully qualified class name containing public static command methods to call. [Default=\"Commands\"]");
@@ -63,6 +54,7 @@ public class parser extends Commands {
 		System.out.println("Single-char qualifiers may be grouped; long qualifiers may be truncated to unique prefixes and are not case sensitive.");
 		return;
 	}
+	
 	
 	public static void functions() {
 		System.out.println("Function List:\n"
