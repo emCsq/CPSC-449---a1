@@ -19,7 +19,6 @@ public class Trees {
 			return false;
 	}
 	
-	//https://tr.im/VMTsA
 	public boolean alpha(String a) {
 		String pattern = "^[_a-zA-z]*$";
 			if (a.matches(pattern)){
@@ -38,8 +37,12 @@ public class Trees {
 		}
 	}
 	
+	public boolean isChar(String a){
+		return false;
+	}
+	
 	public boolean whiteSpace(String a){
-		String pattern = "^[''   ]*$";
+		String pattern = "^[''\t]*$";
 			if (a.matches(pattern)){
 				return true;
 			}
