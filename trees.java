@@ -1,38 +1,72 @@
 public class Trees {
 	
-	//TO DO
 	// expr	:=	funcall | value
 	public boolean expr(String a){
+		if ((funcall(a) || value(a)))
+			return true;
 		return false;
-	}	
+	}
 	
-	//TO DO
 	// funcall	:=	( identifier { expr }* )
 	public boolean funcall(String a){
-		return false;
+		char[] s = a.toCharArray();
+		if (identifier(Character.toString(s[0]))){
+			for (int i = 0; i<=a.length(); i++) {
+				if (!expr(Character.toString(s[i]))){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
-	//TO DO
+	
 	// identifier	:=	alpha { alphanum }*
 	public boolean identifier(String a){
-		return false;
+		char[] s = a.toCharArray();
+		if (alpha(Character.toString(s[0]))){
+			for (int i = 0; i<=a.length(); i++) {
+				if (!alphaNum(Character.toString(s[i]))){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
-	//TO DO
 	// value	:=	integer | float | string
 	public boolean value(String a){
+		if ((isInteger(a) || isFloat(a) || isString(a)))
+			return true;
 		return false;
 	}
 	
-	//TO DO
 	// integer :=	sign { digit }+ { . }~
 	public boolean isInteger(String a){
+		char[] s = a.toCharArray();
+		if ((sign(s[0]) || digit(Character.toString(s[0])))){
+			if (digit(a.substring(1))) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
-	//TO DO
 	// float :=	sign { digit }+ .  { digit }*
 	public boolean isFloat(String a){
+		char[] s = a.toCharArray();
+		if ((sign(s[0]) || digit(Character.toString(s[0])))){
+			if (a.contains(".")) {
+				int index = a.indexOf(".");
+				if ((a.substring(0, index) + a.substring(index + 1)).contains(".")) {
+					return false;
+				} else if (sign(s[0]) && (s[1] == '.')) {
+					return false;
+				} else if (digit(a.substring(1, index) + a.substring(index + 1))) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
