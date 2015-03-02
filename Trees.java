@@ -1,5 +1,6 @@
 package a2;
 public class Trees {
+
 	
 	public Trees() {
 		
@@ -134,7 +135,6 @@ public class Trees {
 	}
 	
 	// whitespace := {''|tab}+
-	//PENDING TO DO ! 
 	public boolean whiteSpace(String a){
 		String pattern = "^[''\t]*$";
 			if (a.matches(pattern)){
