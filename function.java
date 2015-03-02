@@ -1,25 +1,63 @@
+package a2;
 
-public interface Functions {
+public class Functions {
 
-	public String add (String a, String b);
-	public String add (float a, float b);
-	public String add (int a, int b);
+	public Trees tree;
+
+	public String add(String a, String b) {
+		String ans = null;
+		if (tree.isString(a) && tree.isString(b)) {
+			ans = a + b;
+		}
+		return ans;
+	}
 	
-	public String sub (float a, float b);
-	public String sub (int a, int b);
+	public float add(float a, float b) {
+		return 0;
+	}
 	
-	public String div (int a, int b);
-	public String div (float a, float b);
+	public int add(int a, int b) {
+		return 0;
+	}
 	
-	public String mul (int a, int b);
-	public String mul (float a, float b);
+	public float sub(float a, float b) {
+		return 0;
+	}
+	public int sub(int a, int b) {
+		return 0;
+	}
 	
-	public String inc (int a);
-	public String inc (float a);
+	public String div(int a, int b) {
+		return null;
+	}
+	public String div(float a, float b) {
+		return null;
+	}
 	
-	public String dec (int a);
-	public String dec (float a);
+	public String mul(int a, int b) {
+		return null;
+	}
+	public String mul(float a, float b) {
+		return null;
+	}
 	
-	public String len (int a);
+	public String inc(int a) {
+		return null;
+	}
+	public String inc(float a) {
+		return null;
+	}
+	
+	public String dec(int a) {
+		return null;
+	}
+	public String dec(float a) {
+		return null;
+	}
+	
+	public String len(int a) {
+		return null;
+	}
+
 
 }
