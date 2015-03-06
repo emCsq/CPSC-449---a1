@@ -171,18 +171,11 @@ public class main {
 	
 	
 	public String processStringConcat(String arg1, String arg2) {
-		//String result;
-		//if (funct.compareTo("add") == 0) {
 		return function.add(arg1, arg2);
-		//} 
-		//return result;
 	}
 	
 	public int processStringLength(String arg1) {
-		//int result;
-		//if (funct.compareTo("len") == 0) {
 		return function.len(arg1);
-		//}
 	}
 	
 }
