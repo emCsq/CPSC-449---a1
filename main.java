@@ -33,86 +33,63 @@ public class main {
 	}
 	
 	public void checkNotQuitInput(String userIn) {
-		if (userIn.startsWith("add")) {
-			String[] addArray = userIn.split(" ");
-			if (addArray.length != 3) {
-				System.out.println("Unexpected character encountered at offset.");
-			} else {	
-				if ((addArray[1] == null) || (addArray[2] == null)){
-					System.out.println("FAIL.");
-				} else if (tree.isInteger(addArray[1]) && tree.isInteger(addArray[2])) {
-					System.out.println(function.add(Integer.parseInt(addArray[1]), Integer.parseInt(addArray[2])));
-				} else if (tree.isFloat(addArray[1]) && tree.isFloat(addArray[2])) {
-					System.out.println(function.add(Float.parseFloat(addArray[1]), Float.parseFloat(addArray[2])));
-				} else if (tree.isString(addArray[1]) && tree.isString(addArray[2])) {
-					System.out.println(function.add(addArray[1], addArray[2]));
-				} 
-			}
-		} else if (userIn.startsWith("sub")) {
-			String[] subArray = userIn.split(" ");
-			if (subArray.length != 3) {
-				System.out.println("Unexpected character encountered at offset.");
+		String concatResult = "";
+		int stringLength = -9999999;
+		int intResult = -9999999;
+		float floatResult = -9999999;
+		boolean arg1_Integer, arg2_Integer, arg1_Float, arg2_Float, arg1_String, arg2_String;
+		
+		String[] inArray = userIn.split(" ");
+
+		//NOTE: inArray args are tentative in place of the legit arguments that will be from the tree	
+		if (inArray.length == 3) {		//function arg1 arg2
+			arg1_Integer = tree.isInteger(inArray[1]);	//check if arg1 is an Integer
+			arg2_Integer = tree.isInteger(inArray[2]);	//check if arg2 is an Integer 
+			arg1_Float = tree.isFloat(inArray[1]);		//check if arg1 is a Float
+			arg2_Float = tree.isFloat(inArray[2]);		//check if arg2 is a Float
+			arg1_String = tree.isString(inArray[1]);	//check if arg1 is a String
+			arg2_String = tree.isString(inArray[2]);	//check if arg2 is a String 	
+
+			if ((arg1_Integer == true) && (arg2_Integer == true)) {
+				intResult = this.processTwoIntegers(inArray[0], Integer.parseInt(inArray[1]), Integer.parseInt(inArray[2]));
+			} else if ((arg1_Float == true) && (arg2_Float == true)) {
+				floatResult = this.processTwoFloats(inArray[0], Float.parseFloat(inArray[1]), Float.parseFloat(inArray[2]));
+			} else if (((arg1_Float == true) && (arg2_Integer == true)) || ((arg1_Integer == true) && (arg2_Float == true))) {
+				System.out.println("Incorrect argument types.");
+			} else if ((arg1_String == true) && (arg2_String == true)) {
+				concatResult = this.processStringConcat(inArray[1], inArray[2]);
 			} else {
-				if (tree.isInteger(subArray[1]) && tree.isInteger(subArray[2])) {
-					System.out.println(function.sub(Integer.parseInt(subArray[1]), Integer.parseInt(subArray[2])));
-				} else if (tree.isFloat(subArray[1]) && tree.isFloat(subArray[2])) {
-					System.out.println(function.sub(Float.parseFloat(subArray[1]), Float.parseFloat(subArray[2])));
-				} 
+				System.out.println("Unexpected character encountered at offset."); //temp
 			}
-		} else if (userIn.startsWith("div")) {
-			String[] divArray = userIn.split(" ");
-			if (divArray.length != 3) {
-				System.out.println("Unexpected character encountered at offset.");
+		} else if (inArray.length == 2) {	//function arg1
+			arg1_Integer = tree.isInteger(inArray[1]);
+			arg1_Float = tree.isFloat(inArray[1]);
+			arg1_String = tree.isString(inArray[1]);
+			
+			if (arg1_Integer == true) {
+				intResult = this.processOneInteger(inArray[0], Integer.parseInt(inArray[1]));
+			} else if (arg1_Float == true) {
+				floatResult = this.processOneFloat(inArray[0], Float.parseFloat(inArray[1]));
+			} else if ((inArray[0].compareTo("len") == 0) && arg1_String == true) {
+				stringLength = this.processStringLength(inArray[1]);
 			} else {
-				if (tree.isFloat(divArray[1]) && tree.isFloat(divArray[2])) {
-					System.out.println(function.div(Float.parseFloat(divArray[1]), Float.parseFloat(divArray[2])));
-				} else if (tree.isInteger(divArray[1]) && tree.isInteger(divArray[2])) {
-					System.out.println(function.div(Integer.parseInt(divArray[1]), Integer.parseInt(divArray[2])));
-				} 
-			}
-		} else if (userIn.startsWith("mul")) {
-			String[] mulArray = userIn.split(" ");
-			if (mulArray.length != 3) {
-				System.out.println("Unexpected character encountered at offset.");
-			} else {
-				if (tree.isFloat(mulArray[1]) && tree.isFloat(mulArray[2])) {
-					System.out.println(function.mul(Float.parseFloat(mulArray[1]), Float.parseFloat(mulArray[2])));
-				} else if (tree.isInteger(mulArray[1]) && tree.isInteger(mulArray[2])) {
-					System.out.println(function.mul(Integer.parseInt(mulArray[1]), Integer.parseInt(mulArray[2])));
-				}
-			}
-		} else if (userIn.startsWith("inc")) {
-			String[] incArray = userIn.split(" ");
-			if (incArray.length != 2) {
-				System.out.println("Unexpected character encountered at offset.");
-			} else {
-				if (tree.isFloat(incArray[1])) {
-					System.out.println(function.inc(Float.parseFloat(incArray[1])));
-				} else if (tree.isInteger(incArray[1])) {
-					System.out.println(function.inc(Integer.parseInt(incArray[1])));
-				}
-			}
-		} else if (userIn.startsWith("dec")) {
-			String[] decArray = userIn.split(" ");
-			if (decArray.length != 2) {
-				System.out.println("Unexpected character encountered at offset.");
-			} else {
-				if (tree.isFloat(decArray[1])) {
-					System.out.println(function.dec(Float.parseFloat(decArray[1])));
-				} else if (tree.isInteger(decArray[1])) {
-					System.out.println(function.dec(Integer.parseInt(decArray[1])));
-				}
-			}
-		} else if (userIn.startsWith("len")) {
-			String[] lenArray = userIn.split(" ");
-			if (lenArray.length != 2) {
-				System.out.println("Unexpected character encountered at offset.");
-			} else {
-				System.out.println(function.len(lenArray[1]));
+				System.out.println("Unexpected character encountered at offset."); //temp
 			}
 		} else {
-				System.out.println("Matching function for '" + userIn + "' not found at offset 1.");
+			System.out.println("FAIL"); //temp
 		}
+	
+		//print out the FINAL result 
+		if (intResult != -9999999) {
+			System.out.println(intResult);
+		} else if (floatResult != -9999999) {
+			System.out.println(floatResult);	
+		}else if (concatResult != "") {
+			System.out.println(concatResult);
+		} else if (stringLength != -9999999) {
+			System.out.println(stringLength);
+		}
+		
 	}
 
 	public void startUp() {
@@ -142,7 +119,70 @@ public class main {
 				+ "(dec int) : int\n"
 				+ "(dec float) : float\n"
 				+ "(len string) : int\n");
-		return;
+	}
+	
+	public int processTwoIntegers(String funct, int arg1, int arg2) {
+		if (funct.compareTo("add") == 0) {
+			return function.add(arg1, arg2);
+		} else if (funct.compareTo("sub") == 0) {
+			return function.sub(arg1, arg2);
+		} else if (funct.compareTo("div") == 0) {
+			return function.div(arg1, arg2);
+		} else if (funct.compareTo("mul") == 0) {
+			return function.mul(arg1, arg2);
+		} else {
+			return -1;
+		}
+	}
+	
+	public int processOneInteger(String funct, int arg1) {
+		if (funct.compareTo("inc") == 0) {
+			return function.inc(arg1);
+		} else if (funct.compareTo("dec") == 0) {
+			return function.dec(arg1);
+		} else {
+			return -1;
+		}
+	}	
+	
+	public float processTwoFloats(String funct, float arg1, float arg2) {
+		if (funct.compareTo("add") == 0) {
+			return function.add(arg1, arg2);
+		} else if (funct.compareTo("sub") == 0) {
+			return function.sub(arg1, arg2);
+		} else if (funct.compareTo("div") == 0) {
+			return function.div(arg1, arg2);
+		} else if (funct.compareTo("mul") == 0) {
+			return function.mul(arg1, arg2);
+		} else {
+			return -1;
+		}
+	}
+	
+	public float processOneFloat(String funct, float arg1) {
+		if (funct.compareTo("inc") == 0) {
+			return function.inc(arg1);
+		} else if (funct.compareTo("dec") == 0) {
+			return function.dec(arg1);
+		} else {
+			return -1;
+		}
+	}	
+	
+	
+	public String processStringConcat(String arg1, String arg2) {
+		//String result;
+		//if (funct.compareTo("add") == 0) {
+		return function.add(arg1, arg2);
+		//} 
+		//return result;
+	}
+	
+	public int processStringLength(String arg1) {
+		//int result;
+		//if (funct.compareTo("len") == 0) {
+		return function.len(arg1);
+		//}
 	}
 	
 }
