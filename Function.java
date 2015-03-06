@@ -1,107 +1,57 @@
-package a2;
-
 public class Functions {
-
-	public Trees tree;
-
-	public Functions()
-	{
-		tree = new Trees();
+	
+	public static String add(String a, String b) {		
+		return a.concat(b);
+	}	
+	
+	public static float add(float a, float b) {		
+		return a+b; 
 	}
 	
-	public String add(String a, String b) {		
-		if ((a == null) || (b == null)){
-			return "null"; 
-		}
-		
-		String ans = null;
-		if (tree.isString(a) && tree.isString(b)) {
-			ans = a.concat(b);
-		}
-		return ans;
+	public static int add(int a, int b) {
+		return a+b; 
 	}
 	
-	
-	public float add(float a, float b) {		
-		if (tree.isFloat(Float.toString(a)) && tree.isFloat(Float.toString(b))) {
-			return a+b; 
-		}
-		return -1; 
+	public static float sub(float a, float b) {
+		return a-b; 
 	}
 	
-	public int add(int a, int b) {
-		if (tree.isInteger(Integer.toString(a)) && tree.isInteger(Integer.toString(b))) {
-			return a+b; 
-		}
-		return -1; 
+	public static int sub(int a, int b) {
+		return a-b; 
 	}
 	
-	public float sub(float a, float b) {
-		if (tree.isFloat(Float.toString(a)) && tree.isFloat(Float.toString(b))) {
-			return a-b; 
-		}
-		return -1; 
-	}
-	public int sub(int a, int b) {
-		if (tree.isInteger(Integer.toString(a)) && tree.isInteger(Integer.toString(b))) {
-			return a-b; 
-		}
-		return -1; 
+	public static int div(int a, int b) {
+		return a/b; 
 	}
 	
-	public int div(int a, int b) {
-		if (tree.isInteger(Integer.toString(a)) && tree.isInteger(Integer.toString(b))) {
-			return a/b; 
-		}
-		return -1; 
-	}
-	public float div(float a, float b) {
-		if (tree.isFloat(Float.toString(a)) && tree.isFloat(Float.toString(b))) {
-			return a/b; 
-		}
-		return -1; 
+	public static float div(float a, float b) {
+		return a/b; 
 	}
 	
-	public int mul(int a, int b) {
-		if (tree.isInteger(Integer.toString(a)) && tree.isInteger(Integer.toString(b))) {
-			return a*b; 
-		}
-		return -1; 
-	}
-	public float mul(float a, float b) {
-		if (tree.isFloat(Float.toString(a)) && tree.isFloat(Float.toString(b))) {
-			return a*b; 
-		}
-		return -1; 
+	public static int mul(int a, int b) {
+		return a*b; 
 	}
 	
-	public int inc(int a) {
-		if (tree.isInteger(Integer.toString(a))){
-			return a+1;
-		}
-		return -1;
-	}
-	public float inc(float a) {
-		if (tree.isFloat(Float.toString(a))){
-			return a+1;
-		}
-		return -1;
+	public static float mul(float a, float b) {
+		return a*b; 
 	}
 	
-	public int dec(int a) {
-		if (tree.isInteger(Integer.toString(a))){
-			return a-1;
-		}
-		return -1;
+	public static int inc(int a) {
+		return a+1;
 	}
-	public float dec(float a) {
-		if (tree.isFloat(Float.toString(a))){
-			return a-1;
-		}
-		return -1;
+	public static float inc(float a) {
+		return a+1;
 	}
 	
-	public int len(String a) {
+	public static int dec(int a) {
+		return a-1;
+	}
+	
+	public static float dec(float a) {
+		return a-1;
+	}
+	
+	public static int len(String a) {
 		return a.length();
 	}
 
