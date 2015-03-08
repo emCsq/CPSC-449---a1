@@ -1,0 +1,45 @@
+package a2;
+
+import java.util.EmptyStackException;
+
+public class Errors {
+	
+	static //errors should continue with the program from Main
+	Main main = new Main();
+	
+	/*
+	  When an error is found, print out error message then revert back to program
+	 
+	 	> (add 1 (mul 10. 5))
+	  	Matching function for '(mul float int)' not found at offset 8
+		(add 1 (mul 10. 5))
+		--------^
+		java.text.ParseException: Matching function for '(mul float int)' not found
+			at Execution.execute(Execution.java:99)
+			at Execution.execute(Execution.java:73)
+			at Methods.<init>(Methods.java:51)
+			at Methods.processCommandLineAndGo(Methods.java:145)
+			at Methods.main(Methods.java:74)
+	 */
+	
+	public static void errorCatch(String func, int offset) {
+
+		int size = 0;	
+		
+		try {
+			System.out.println("Matching function for '" + func + "' not found at offset " + offset + "\n"
+					+ func);
+			
+			if (size == 0){
+				throw new EmptyStackException();
+			}
+			//lineWidth();	TO DO		
+		} catch (EmptyStackException e){
+			//get stack trace
+			e.printStackTrace(System.out);
+			main.mainMenu();
+		}
+		main.mainMenu();
+	}
+	
+}
