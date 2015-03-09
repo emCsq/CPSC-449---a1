@@ -1,11 +1,14 @@
 package a2;
 
-import java.util.EmptyStackException;
+import java.util.*;
 
 public class Errors {
 	
-	static //errors should continue with the program from Main
-	Main main = new Main();
+	//errors should continue with the program from Main
+	static Main main = new Main();
+	
+	public Errors() {		
+	}
 	
 	/*
 	  When an error is found, print out error message then revert back to program
@@ -22,23 +25,34 @@ public class Errors {
 			at Methods.main(Methods.java:74)
 	 */
 	
-	public static void errorCatch(String func, int offset) {
+	public static void beginError (String func, int offset){
+		System.out.println("Matching function for '" + func + "' not found at offset " + offset + "\n"
+				+ func);
+		return;
+	}
+	
+	public static void lineIndicator (){
+		return;
+	}
+	
+	public static void errorCatch(String func, int offset) throws Exception {
 
-		int size = 0;	
+		boolean nonFatalError = true;	
 		
 		try {
-			System.out.println("Matching function for '" + func + "' not found at offset " + offset + "\n"
-					+ func);
 			
-			if (size == 0){
+			beginError(func, offset);			
+			if (nonFatalError){
 				throw new EmptyStackException();
 			}
-			//lineWidth();	TO DO		
-		} catch (EmptyStackException e){
+			lineIndicator();
+			
+		} catch (Throwable e){
 			//get stack trace
 			e.printStackTrace(System.out);
 			main.mainMenu();
 		}
+		
 		main.mainMenu();
 	}
 	
