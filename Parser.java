@@ -2,7 +2,7 @@ import java.util.*;
 import java.lang.*;
 import java.text.*;
 
-public class parser {
+public class Parser {
 
 	public static void main (String [] args){
     
@@ -24,6 +24,32 @@ public class parser {
 				if (true) {			/* valid, check if the args[2] (aka the class) is valid */
 					/* if args[2] is valid, ~ENTER COMPILER PROGRAM~
 					MORE TO DO HERE!! */
+					
+										/*	To load a class, it must be in the classpath
+					Tell the class loader to add your new jar file to the classpath
+					However, class loader deals with URL
+						Therefore, we need to do the following conversion:
+							.jar -> URI -> URL -> classloader
+					1) There exists a method to convert .jar -> URI
+					2) There exists a method to convert URI -> URL
+					3) Use the URL to put into classloader!
+					*/
+					
+					// File has a method to turn a File into a URI, and URI has a method to turn a URI into a URL. 
+					File f = new File(args[1]);
+					URL url = f.toURI().toURL();
+					
+					//You can get the class loader easily enough
+					URLClassLoader sysloader = (URLClassLoader)ClassLoader.getSystemClassLoader();
+					
+					//We can use reflection (Method.setAccessible()) to get around the system and invoke the method anyway
+					Class<?> sysclass = URLClassLoader.class; //retrieve URLClassLoader class 
+					Method method = sysclass.getDeclaredMethod("addURL", parameters); //Retrieve the method called addURL from the URLClassLoader
+					method.setAccessible(true); //force the method to be is accessible
+					method.invoke(sysloader, new Object[]{ u }); //invoke method
+					
+					//We can assume that our .jar file is in the classpath for us to use and have access to
+					
 					mainStuff.mainMenu();
 				} else {
 					System.out.println("Could not find class: '" + inputAsArray[2]);
