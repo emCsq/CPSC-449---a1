@@ -9,6 +9,14 @@ public class ParserTest {
 	Functions functionTest = new Functions();
 	
 	@Test
+	public void testErrorCatch() throws Exception {
+		
+		String Exception = "(add 1 (mul 10. 5))";
+		Exception EmptyStackException = null;
+		Errors.errorCatch(EmptyStackException); 
+	}
+	
+	@Test
 	public void testAddString() {
 		String addResult = functionTest.add("cat", "dog");
 		System.out.println("testAddString()\n\tExpected result: catdog \t Real result: " + addResult);
