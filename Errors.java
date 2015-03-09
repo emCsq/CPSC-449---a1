@@ -6,8 +6,12 @@ public class Errors {
 	
 	//errors should continue with the program from Main
 	static Main main = new Main();
+	static Trees trees = new Trees();
 	
-	public Errors() {		
+	public Errors() {
+		int offset = 0; 
+		String func = null;
+		Exception e = null;
 	}
 	
 	/*
@@ -25,31 +29,62 @@ public class Errors {
 			at Methods.main(Methods.java:74)
 	 */
 	
-	public static void beginError (String func, int offset){
-		System.out.println("Matching function for '" + func + "' not found at offset " + offset + "\n"
-				+ func);
-		return;
+	public static int getOffset() {
+		int offset = 0; 
+		return offset;
 	}
-	
-	public static void lineIndicator (){
-		return;
-	}
-	
-	public static void errorCatch(String func, int offset) throws Exception {
 
+	public static String getInput() {
+		String func = null; 
+		return func;
+	}
+
+	public static void setOffset(int newOffset) {
+		int offset = newOffset;
+	}
+	
+	public static void setInput(String newInput) {
+		String input = newInput;
+	}
+
+	public static void beginError (){
+		System.out.println("Matching function for '" + getInput() + "' not found at offset " + getOffset() + "\n"
+				+ getInput());
+		return;
+	}
+	
+	
+	public static void offsetPoint(){
+
+		if (trees.funcall(getInput()) == true){
+			return;
+		} else {
+			int i;
+			do {			
+				for (i=0; i<getOffset(); i++){
+					System.out.print("-");
+				}				
+			} while (i != 0);
+			System.out.print("^");
+		}
+	
+		return;
+	}
+	
+	public static void errorCatch(Exception e) throws Exception {
 		boolean nonFatalError = true;	
 		
-		try {
-			
-			beginError(func, offset);			
+		try {			
+			beginError();		
+			//Take out once you get the actual error given
 			if (nonFatalError){
-				throw new EmptyStackException();
-			}
-			lineIndicator();
+				throw new Exception();
+			}		
+			//offsetPoint();
 			
-		} catch (Throwable e){
+		} catch (Throwable e1){
 			//get stack trace
-			e.printStackTrace(System.out);
+			e1.printStackTrace(System.out);
 			main.mainMenu();
 		}
 		
