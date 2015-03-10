@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class main {
+public class Main {
 
 	boolean keepRunningParser = true;
 	String userInput = "";
@@ -10,7 +10,7 @@ public class main {
 	public Trees tree;
 	public Functions function;
 
-	public main() {
+	public Main() {
 		tree = new Trees();
 		function = new Functions();
 	}
@@ -26,10 +26,32 @@ public class main {
 			} else if (userInput.equals("f")) {	//'f' displays the functions available
 				this.functions();
 			} else {
-				this.checkNotQuitInput(userInput);
+				validBrackets = this.checkBrackets(userInput);
+				if (validBrackets == false) {
+					System.out.println("Matching braces error.");
+				} else {
+					this.checkNotQuitInput(userInput);
+				}
 			}
 		}
 
+	}
+
+	public boolean checkBrackets (String userIn) {
+		int balancedBraces = 0;
+		char[] userIn_charArray = userIn.toCharArray();
+		
+		for (int i = 0; i < userIn_charArray.length; i++){
+			if (userIn_charArray[i] == '(') {
+				balancedBraces++;
+			} else if (userIn_charArray[i] == ')') {
+				balancedBraces--;
+				if (balancedBraces < 0) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	public void checkNotQuitInput(String userIn) {
