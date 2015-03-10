@@ -48,6 +48,26 @@ public class Parser {
 					method.setAccessible(true); //force the method to be is accessible
 					method.invoke(sysloader, new Object[]{ u }); //invoke method
 					
+					// This gets the classes from a jar file. Haven't tested it yet, I need to link the jar file properly
+					/*String pathToJar = "commands.jar";
+					JarFile jarFile = new JarFile(pathToJar);
+					Enumeration e = jarFile.entries();
+
+					URL[] urls = { new URL("jar:file:" + pathToJar + "!/") };
+					URLClassLoader cl = URLClassLoader.newInstance(urls);
+
+					    while (e.hasMoreElements()) {
+					        JarEntry je = (JarEntry) e.nextElement();
+					        if(je.isDirectory() || !je.getName().endsWith(".class")){
+					            continue;
+					        }
+					    // -6 because of .class
+					    String className = je.getName().substring(0,je.getName().length()-6);
+					    className = className.replace('/', '.');
+					    Class c = cl.loadClass(className);
+
+					}*/
+					
 					//We can assume that our .jar file is in the classpath for us to use and have access to
 					
 					mainStuff.mainMenu();
