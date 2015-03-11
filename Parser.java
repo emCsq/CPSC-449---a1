@@ -19,7 +19,8 @@ public class Parser {
 			System.out.println("Qualifier --help (-h, -?) should not appear with any command-line arguments.");
 			synopsis();
 		} else if (args[0].equals("-v") || args[0].equals("--verbose")) {
-			System.out.println("SOMETHING TO DO LATER ON");			//TEMPORARY
+			Flags.setVerbose(true); //sets verbose mode in action
+			System.out.println("Running in verbose mode...");		
 			if (true) {			/* the args[1] (aka the jar file) is valid */
 				if (true) {			/* valid, check if the args[2] (aka the class) is valid */
 					/* if args[2] is valid, ~ENTER COMPILER PROGRAM~
