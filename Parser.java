@@ -1,3 +1,5 @@
+package a2;
+
 import java.util.*;
 import java.lang.*;
 import java.text.*;
@@ -7,7 +9,7 @@ public class Parser {
 	public static void main (String [] args){
     
 		Scanner input = new Scanner(System.in);	
-		main mainStuff = new main();
+		Main mainStuff = new Main();
 		char[] inputAsArray;
 
 		if (args.length == 0) {
