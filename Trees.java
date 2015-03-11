@@ -8,6 +8,11 @@ public class Trees {
 	
 	// expr	:=	funcall | value
 	public boolean expr(String a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< expr() >>>");
+		}
+		
 		if ((funcall(a) || value(a)))
 			return true;
 		return false;
@@ -15,6 +20,11 @@ public class Trees {
 	
 	// funcall	:=	( identifier { expr }* )
 	public boolean funcall(String a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< funcall() >>>");
+		}
+		
 		char[] s = a.toCharArray();
 		if (identifier(Character.toString(s[0]))){
 			for (int i = 0; i<=a.length(); i++) {
@@ -29,6 +39,11 @@ public class Trees {
 	
 	// identifier	:=	alpha { alphanum }*
 	public boolean identifier(String a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< identifier() >>>");
+		}
+		
 		char[] s = a.toCharArray();
 		if (alpha(Character.toString(s[0]))){
 			for (int i = 0; i<=a.length(); i++) {
@@ -42,6 +57,11 @@ public class Trees {
 	
 	// value	:=	integer | float | string
 	public boolean value(String a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< value() >>>");
+		}
+		
 		if ((isInteger(a) || isFloat(a) || isString(a)))
 			return true;
 		return false;
@@ -49,6 +69,11 @@ public class Trees {
 	
 	// integer :=	sign { digit }+ { . }~
 	public boolean isInteger(String a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< isInteger() >>>");
+		}
+		
 		char[] s = a.toCharArray();
 		if ((sign(s[0]) || digit(Character.toString(s[0])))){
 			if (digit(a.substring(1))) {
@@ -60,6 +85,11 @@ public class Trees {
 	
 	// float :=	sign { digit }+ .  { digit }*
 	public boolean isFloat(String a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< isFloat() >>>");
+		}
+		
 		char[] s = a.toCharArray();
 		if ((sign(s[0]) || digit(Character.toString(s[0])))){
 			if (a.contains(".")) {
@@ -78,6 +108,11 @@ public class Trees {
 
 	// string := " { char }* "
 	public boolean isString(String a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< isString() >>>");
+		}
+		
 		char[] s = a.toCharArray();
 		if ((s[0] == '\"') && (s[a.length()] == '\"')){
 			for (int i = 0; i<=a.length(); i++) {
@@ -91,6 +126,11 @@ public class Trees {
 	
 	// alpha := a..z|A..Z|_
 	public boolean alpha(String a) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< alpha() >>>");
+		}
+		
 		String pattern = "^[_a-zA-z]*$";
 			if (a.matches(pattern)){
 				return true;
@@ -100,6 +140,11 @@ public class Trees {
 	
 	// alphanum := alpha|digit
 	public boolean alphaNum(String a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< alphaNum() >>>");
+		}
+		
 		if (alpha(a) || digit(a))
 			return true;
 		return false;
@@ -107,6 +152,11 @@ public class Trees {
 	
 	// char := <any character>
 	public boolean isChar(char a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< isChar() >>>");
+		}
+		
 		if (Character.isDefined(a)){
 			return true;
 		}
@@ -115,6 +165,10 @@ public class Trees {
 	
 	// sign := nothing|+|-
 	public boolean sign(char a) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< sign() >>>");
+		}
 		
 		if (a == '+'){
 			return true;
@@ -127,6 +181,11 @@ public class Trees {
 	
 	// digit := 0..9
 	public boolean digit(String a) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< digit() >>>");
+		}
+		
 		String pattern = "^[0-9]*$";
 			if (a.matches(pattern)){
 				return true;
@@ -136,6 +195,11 @@ public class Trees {
 	
 	// whitespace := {''|tab}+
 	public boolean whiteSpace(String a){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< whiteSpace() >>>");
+		}
+		
 		String pattern = "^[''\t]*$";
 			if (a.matches(pattern)){
 				return true;
