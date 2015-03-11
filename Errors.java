@@ -48,6 +48,12 @@ public class Errors {
 	}
 
 	public static void beginError (){
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< beginError() >>>"
+			+ "Non-Fatal Error encountered");
+		}
+		
 		System.out.println("Matching function for '" + getInput() + "' not found at offset " + getOffset() + "\n"
 				+ getInput());
 		return;
