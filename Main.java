@@ -17,6 +17,11 @@ public class Main {
 	
 	
 	public void mainMenu() {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< mainMenu() >>>");
+		}
+		
 		startUp();
 		while (keepRunningParser == true) {
 			System.out.print("> ");
@@ -38,6 +43,11 @@ public class Main {
 	}
 
 	public boolean checkBrackets (String userIn) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< checkBrackets() >>>");
+		}
+		
 		int balancedBraces = 0;
 		char[] userIn_charArray = userIn.toCharArray();
 		
@@ -55,6 +65,11 @@ public class Main {
 	}
 	
 	public void checkNotQuitInput(String userIn) {
+				//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< checkNotQuitInput() >>>");
+		}
+		
 		String concatResult = "";
 		int stringLength = -9999999;
 		int intResult = -9999999;
@@ -144,6 +159,11 @@ public class Main {
 	}
 	
 	public int processTwoIntegers(String funct, int arg1, int arg2) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< processTwoIntegers() >>>");
+		}		
+		
 		if (funct.compareTo("add") == 0) {
 			return function.add(arg1, arg2);
 		} else if (funct.compareTo("sub") == 0) {
@@ -158,6 +178,11 @@ public class Main {
 	}
 	
 	public int processOneInteger(String funct, int arg1) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< processOneInteger() >>>");
+		}
+		
 		if (funct.compareTo("inc") == 0) {
 			return function.inc(arg1);
 		} else if (funct.compareTo("dec") == 0) {
@@ -168,6 +193,11 @@ public class Main {
 	}	
 	
 	public float processTwoFloats(String funct, float arg1, float arg2) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< processTwoFloats() >>>");
+		}
+		
 		if (funct.compareTo("add") == 0) {
 			return function.add(arg1, arg2);
 		} else if (funct.compareTo("sub") == 0) {
@@ -182,6 +212,11 @@ public class Main {
 	}
 	
 	public float processOneFloat(String funct, float arg1) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< processOneFloat() >>>");
+		}
+		
 		if (funct.compareTo("inc") == 0) {
 			return function.inc(arg1);
 		} else if (funct.compareTo("dec") == 0) {
@@ -193,10 +228,20 @@ public class Main {
 	
 	
 	public String processStringConcat(String arg1, String arg2) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< processStringConcat() >>>");
+		}
+		
 		return function.add(arg1, arg2);
 	}
 	
 	public int processStringLength(String arg1) {
+		//if verbose is on, track code
+		if (Flags.verboseOn) {
+			System.out.println("<<< processStringLength() >>>");
+		}
+		
 		return function.len(arg1);
 	}
 	
