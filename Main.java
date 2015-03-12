@@ -28,6 +28,12 @@ public class Main {
 			userInput = input.nextLine();
 			if (userInput.equals("q")) {	//'q' quits the program
 				keepRunningParser = false;
+			}  else if (userInput.equals("v")) {		//'v' toggles verbose mode on/off
+				if (Flags.getVerbose() == true) {	//if verbose is on
+					Flags.setVerbose(false);		//turn it off
+				} else {
+					Flags.setVerbose(true);			// else vice-versa
+				}
 			} else if (userInput.equals("f")) {	//'f' displays the functions available
 				this.functions();
 			} else {
