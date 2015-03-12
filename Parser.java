@@ -1,13 +1,19 @@
+package a2;
+
 import java.util.*;
+import java.util.jar.*;
+import java.io.*;
+import java.lang.reflect.*;
 import java.lang.*;
 import java.text.*;
+import java.net.*;
 
 public class Parser {
-
-	public static void main (String [] args){
+	private static final Class[] parameters = new Class[] {URL.class};
+	public static void main (String [] args) throws IOException, ClassNotFoundException{
     
 		Scanner input = new Scanner(System.in);	
-		MainPrompt mainStuff = new MainPrompt();
+		Main mainStuff = new Main();
 		char[] inputAsArray;
 
 		if (args.length == 0) {
@@ -24,6 +30,68 @@ public class Parser {
 				if (true) {			/* valid, check if the args[2] (aka the class) is valid */
 					/* if args[2] is valid, ~ENTER COMPILER PROGRAM~
 					MORE TO DO HERE!! */
+					
+										/*	To load a class, it must be in the classpath
+					Tell the class loader to add your new jar file to the classpath
+					However, class loader deals with URL
+						Therefore, we need to do the following conversion:
+							.jar -> URI -> URL -> classloader
+					1) There exists a method to convert .jar -> URI
+					2) There exists a method to convert URI -> URL
+					3) Use the URL to put into classloader!
+					*/
+					
+					// File has a method to turn a File into a URI, and URI has a method to turn a URI into a URL. 
+			/*		File f = new File(args[1]);
+					URL url = f.toURI().toURL();
+					
+					//You can get the class loader easily enough
+					URLClassLoader sysloader = (URLClassLoader)ClassLoader.getSystemClassLoader();
+					
+					//We can use reflection (Method.setAccessible()) to get around the system and invoke the method anyway
+					Class<?> sysclass = URLClassLoader.class; //retrieve URLClassLoader class 
+					Method method = sysclass.getDeclaredMethod("addURL", parameters); //Retrieve the method called addURL from the URLClassLoader
+					method.setAccessible(true); //force the method to be is accessible
+					method.invoke(sysloader, new Object[]{ u }); //invoke method
+			*/
+					//http://stackoverflow.com/questions/11016092/how-to-load-classes-at-runtime-from-a-folder-or-jar
+				/*	String pathToJar = "commands.jar"; // Need to link jar file here
+					JarFile jarFile = new JarFile(pathToJar);
+					Enumeration e = jarFile.entries();
+
+					
+					
+					URL[] urls = { new URL("jar:file:" + pathToJar + "!/") };
+					URLClassLoader cl = URLClassLoader.newInstance(urls);
+
+					    while (e.hasMoreElements()) {
+					        JarEntry je = (JarEntry) e.nextElement();
+					        if(je.isDirectory() || !je.getName().endsWith(".class")){
+					            continue;
+					        }
+					    // -6 because of .class
+					    String className = je.getName().substring(0,je.getName().length()-6);
+					    className = className.replace('/', '.');
+					    Class c = cl.loadClass(className);
+
+					}*/
+					
+					//We can assume that our .jar file is in the classpath for us to use and have access to
+					
+					
+					File f = new File(args[1]);
+					URL url = f.toURI().toURL();
+					URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+					Class<?> sysclass = URLClassLoader.class;
+			        try {
+			            Method method = sysclass.getDeclaredMethod("addURL", parameters);
+			            method.setAccessible(true);
+			            method.invoke(sysloader, new Object[] {url});
+			        } catch (Throwable t) {
+			            t.printStackTrace();
+			            throw new IOException("Error, could not add URL to system classloader");
+			        }
+					
 					mainStuff.mainMenu();
 				} else {
 					System.out.println("Could not find class: '" + inputAsArray[2]);
