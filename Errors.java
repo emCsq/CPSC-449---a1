@@ -2,9 +2,25 @@ package a2;
 
 import java.util.*;
 
+/*
+Purpose of class: 
+When an error is found, print out error message then revert back to program
+
+	> (add 1 (mul 10. 5))
+	Matching function for '(mul float int)' not found at offset 8
+	(add 1 (mul 10. 5))
+	--------^
+	java.text.ParseException: Matching function for '(mul float int)' not found
+		at Execution.execute(Execution.java:99)
+		at Execution.execute(Execution.java:73)
+		at Methods.<init>(Methods.java:51)
+		at Methods.processCommandLineAndGo(Methods.java:145)
+		at Methods.main(Methods.java:74)
+*/
+
 public class Errors {
 	
-	//errors should continue with the program from InCompiler
+	//errors should continue with the program from Main
 	static InCompiler main = new InCompiler();
 	static Trees trees = new Trees();
 	
@@ -13,22 +29,7 @@ public class Errors {
 		String func = null;
 		Exception e = null;
 	}
-	
-	/*
-	  When an error is found, print out error message then revert back to program
-	 
-	 	> (add 1 (mul 10. 5))
-	  	Matching function for '(mul float int)' not found at offset 8
-		(add 1 (mul 10. 5))
-		--------^
-		java.text.ParseException: Matching function for '(mul float int)' not found
-			at Execution.execute(Execution.java:99)
-			at Execution.execute(Execution.java:73)
-			at Methods.<init>(Methods.java:51)
-			at Methods.processCommandLineAndGo(Methods.java:145)
-			at Methods.main(Methods.java:74)
-	 */
-	
+
 	public static int getOffset() {
 		int offset = 0; 
 		return offset;
@@ -60,41 +61,40 @@ public class Errors {
 	}
 	
 	
+	@SuppressWarnings("null")
 	public static void offsetPoint(){
-
+		String s = null;
 		if (trees.funcall(getInput()) == true){
 			return;
-		} else {
-			int i;
-			do {			
-				for (i=0; i<getOffset(); i++){
-					System.out.print("-");
-				}				
-			} while (i != 0);
-			System.out.print("^");
+		} else {			
+			for (int i=0; i<getOffset(); i++){
+				s.concat("-");
+			}	
+			s.concat("-");
 		}
 	
 		return;
 	}
 	
+	/*
 	public static void errorCatch(Exception e) throws Exception {
 		boolean nonFatalError = true;	
 		
 		try {			
-			beginError();		
+			beginError();	
+			offsetPoint();
 			//Take out once you get the actual error given
 			if (nonFatalError){
 				throw new Exception();
-			}		
-			//offsetPoint();
-			
+			}	
 		} catch (Throwable e1){
 			//get stack trace
+			beginError();	
+			offsetPoint();
 			e1.printStackTrace(System.out);
 			main.mainMenu();
-		}
-		
+		}	
 		main.mainMenu();
-	}
+	}*/
 	
 }
