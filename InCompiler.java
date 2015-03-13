@@ -27,6 +27,7 @@ public class InCompiler {
 		while (keepRunningParser == true) {
 			System.out.print("> ");
 			userInput = input.nextLine();
+			Errors.setInput(userInput);
 			if (userInput.equals("q")) {	//'q' quits the program
 				keepRunningParser = false;
 			}  else if (userInput.equals("v")) {		//'v' toggles verbose mode on/off
