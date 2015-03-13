@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Errors {
 	
-	//errors should continue with the program from inCompiler
-	static inCompiler main = new inCompiler();
+	//errors should continue with the program from InCompiler
+	static InCompiler main = new InCompiler();
 	static Trees trees = new Trees();
 	
 	public Errors() {
