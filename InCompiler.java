@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class inCompiler {
+public class InCompiler {
 
 	boolean keepRunningParser = true;
 	String userInput = "";
@@ -11,7 +11,7 @@ public class inCompiler {
 	public Trees tree;
 	public Functions function;
 
-	public inCompiler() {
+	public InCompiler() {
 		tree = new Trees();
 		function = new Functions();
 	}
