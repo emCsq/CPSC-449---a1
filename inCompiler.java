@@ -1,16 +1,17 @@
 import java.util.Scanner;
 
-public class Main {
+public class inCompiler {
 
 	boolean keepRunningParser = true;
 	String userInput = "";
+	boolean validBrackets;
 	
 	Scanner input = new Scanner(System.in);
 
 	public Trees tree;
 	public Functions function;
 
-	public Main() {
+	public inCompiler() {
 		tree = new Trees();
 		function = new Functions();
 	}
