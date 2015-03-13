@@ -15,7 +15,6 @@ public class Parser {
 		InCompiler mainStuff = new InCompiler();
 		
 		try {
-			Scanner input = new Scanner(System.in);	
 			char[] inputAsArray = null;
 	
 			if (args.length == 0) {
