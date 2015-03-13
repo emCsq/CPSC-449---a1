@@ -1,10 +1,9 @@
 package a2;
 
 import java.util.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.lang.*;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.net.*;
 import java.text.*;
 
