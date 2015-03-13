@@ -1,13 +1,14 @@
 package a2;
 
 import java.util.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.lang.*;
-import java.lang.reflect.*;
+import java.lang.reflect.Method;
 import java.net.*;
 import java.text.*;
 
-public class Parser {
+public class ParserMain {
 
 	private static final Class[] parameters = new Class[] {URL.class};
 
@@ -15,6 +16,7 @@ public class Parser {
 		InCompiler mainStuff = new InCompiler();
 		
 		try {
+			Scanner input = new Scanner(System.in);	
 			char[] inputAsArray = null;
 	
 			if (args.length == 0) {
@@ -52,8 +54,6 @@ public class Parser {
 				            method.setAccessible(true);
 				            method.invoke(sysloader, new Object[] {url});
 				        } catch (Throwable t) {
-					    Errors.beginError();	
-					    Errors.offsetPoint();				        	
 				            t.printStackTrace();
 				            throw new IOException("Error, could not add URL to system classloader");
 				        }
@@ -79,16 +79,14 @@ public class Parser {
 					synopsis();
 				}
 			}
-			
 		} catch (Throwable e1){
 			//get stack trace
 			Errors.beginError();	
 			Errors.offsetPoint();
 			e1.printStackTrace(System.out);
 			mainStuff.mainMenu();
-		}
-		
-	mainStuff.mainMenu();
+		}	
+		mainStuff.mainMenu();
 		
     }
 	
