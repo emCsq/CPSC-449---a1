@@ -54,7 +54,9 @@ public class ProcessMethods {
 		}
 		
 		//return out the result of calculation 
-		if (intResult != -9999999) {
+		if ((intResult == 123456789) || (floatResult == 123456789) || (concatResult == null) || (stringLength == 123456789)) {
+			return null;
+		} else if (intResult != -9999999) {
 			//System.out.println("intResult is " + intResult);
 			return Integer.toString(intResult);
 		} else if (floatResult != -9999999) {
@@ -66,8 +68,9 @@ public class ProcessMethods {
 		} else if (stringLength != -9999999) {
 			//System.out.println("stringLength is " + stringLength);
 			return Integer.toString(stringLength);
+		} else {
+			return null;
 		}
-		return null;
 	}
 	
 	public int processTwoIntegers(String funct, int arg1, int arg2) {
@@ -85,7 +88,7 @@ public class ProcessMethods {
 		} else if (funct.compareTo("mul") == 0) {
 			return function.mul(arg1, arg2);
 		} else {
-			return -1;
+			return 123456789;
 		}
 	}
 	
@@ -100,7 +103,7 @@ public class ProcessMethods {
 		} else if (funct.compareTo("dec") == 0) {
 			return function.dec(arg1);
 		} else {
-			return -1;
+			return 123456789;
 		}
 	}	
 	
@@ -119,7 +122,7 @@ public class ProcessMethods {
 		} else if (funct.compareTo("mul") == 0) {
 			return function.mul(arg1, arg2);
 		} else {
-			return -1;
+			return 123456789;
 		}
 	}
 	
@@ -134,7 +137,7 @@ public class ProcessMethods {
 		} else if (funct.compareTo("dec") == 0) {
 			return function.dec(arg1);
 		} else {
-			return -1;
+			return 123456789;
 		}
 	}	
 	
