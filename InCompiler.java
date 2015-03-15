@@ -44,9 +44,10 @@ public class InCompiler {
 				if (validBrackets == false) {
 					System.out.println("Matching braces error.");
 				} else {
-					//this.checkNotQuitInput(userInput);
 					finalAnswer = this.treeTime(userInput);
-					System.out.println(finalAnswer);
+					if (finalAnswer != null) {
+						System.out.println(finalAnswer);
+					}
 				}
 			}
 		}
@@ -78,33 +79,38 @@ public class InCompiler {
 		return true;
 	}
 	
-	public String treeTime(String userIn) {
+public String treeTime(String userIn) {
 		char[] userInAsArray = userIn.toCharArray();
 		char[] newArray = null;
-		String bleh;
+		String concatedResult, recurseResult;
 		boolean arrayStillContainsBraces = true;
-		boolean youreNotFinishedYet = true;
+		boolean arrayStillContainsSpaces = true;
 		
-		//System.out.println("Input is: " + userIn);
+	/*	if ((userInAsArray[0] != '(') && (userInAsArray[userInAsArray.length] != ')')) {
+			System.out.println("Error missing bracket at offset " + Errors.getOffset());
+			return null;
+		}*/
 		for (int i = 0; i < userInAsArray.length; i++) {	
 			if (userInAsArray[i] == '(') {
-				bleh = (new String(userInAsArray, 0, i) + this.treeTime(new String(userInAsArray, i+1, userInAsArray.length-(i+1))));
-				//bleh = this.treeTime(new String(userInAsArray, i+1, userInAsArray.length-(i+1)));
-				//System.out.println("Result this time is " + bleh);
+				recurseResult = this.treeTime(new String(userInAsArray, i+1, userInAsArray.length-(i+1)));
+				//System.out.println("recurseResult is " + recurseResult);
+				//if (recurseResult.contains("null)")) {
+				//	return null;
+				//} else {
+				concatedResult = new String(userInAsArray, 0, i) + recurseResult;
+				//	System.out.println("bleh is " + bleh);
+			//	}
 				
-				newArray = bleh.toCharArray();
+				newArray = concatedResult.toCharArray();
 				arrayStillContainsBraces = arrayHasBraces(newArray);
-				youreNotFinishedYet = arrayHasSpaces(newArray);
-				//System.out.println("bleh is actually " + bleh);
-				if ((arrayStillContainsBraces != true) || (youreNotFinishedYet != true)) {
-					//System.out.println("DONE. Result is " + bleh);
-					return bleh;
+				arrayStillContainsSpaces = arrayHasSpaces(newArray);
+				if ((arrayStillContainsBraces != true) || (arrayStillContainsSpaces != true)) {
+					return concatedResult;
 				} else {
-					return treeTime(bleh);
+					return treeTime(concatedResult);
 				}
 			} else if (userInAsArray[i] == ')') {
-				String thingToProcess = new String(userInAsArray, 0, i);
-				//System.out.println("ThingToProcess = " + thingToProcess);
+				String thingToProcess = new String(userInAsArray, 0, i);				
 				String result = methods.timeToEvaluateStuff(thingToProcess);
 				return result + (new String(userInAsArray, i+1, userInAsArray.length-(i+1)));
 			}
