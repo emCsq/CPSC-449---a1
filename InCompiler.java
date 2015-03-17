@@ -47,6 +47,7 @@ public class InCompiler {
 					finalAnswer = this.treeTime(userInput);
 					if (finalAnswer != null) {
 						System.out.println(finalAnswer);
+						Errors.setInput(userInput);
 					}
 				}
 			}
