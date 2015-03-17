@@ -1,19 +1,12 @@
 package a2;
 
 import java.util.*;
-import java.io.File;
-import java.io.IOException;
-import java.lang.*;
-import java.lang.reflect.Method;
-import java.net.*;
-import java.text.*;
 
 public class ParserMain {
 
-	private static final Class[] parameters = new Class[] {URL.class};
-
 	public static void main (String [] args){
 		InCompiler mainStuff = new InCompiler();
+		LoadJarClass load = new LoadJarClass();
 		
 		try {
 			Scanner input = new Scanner(System.in);	
@@ -35,31 +28,8 @@ public class ParserMain {
 						/* if args[2] is valid, ~ENTER COMPILER PROGRAM~
 						MORE TO DO HERE!! */
 						
-											/*	To load a class, it must be in the classpath
-						Tell the class loader to add your new jar file to the classpath
-						However, class loader deals with URL
-							Therefore, we need to do the following conversion:
-								.jar -> URI -> URL -> classloader
-						1) There exists a method to convert .jar -> URI
-						2) There exists a method to convert URI -> URL
-						3) Use the URL to put into classloader!
-						*/
-					// Source: http://stackoverflow.com/questions/60764/how-should-i-load-jars-dynamically-at-runtime	
-					File f = new File(args[1]);
-					URL url = f.toURI().toURL();
-					URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-					Class<?> sysclass = URLClassLoader.class;
-				        try {
-				            Method method = sysclass.getDeclaredMethod("addURL", parameters);
-				            method.setAccessible(true);
-				            method.invoke(sysloader, new Object[] {url});
-				        } catch (Throwable t) {
-				            t.printStackTrace();
-				            throw new IOException("Error, could not add URL to system classloader");
-				        }
-						
-						//We can assume that our .jar file is in the classpath for us to use and have access to
-						
+						load.load(args[1], args[2]);
+					
 						mainStuff.mainMenu();
 					} else {
 						System.out.println("Could not find class: '" + inputAsArray[2]);
