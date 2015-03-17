@@ -50,10 +50,12 @@ public class ParserMain {
 				}
 			}
 		} catch (Throwable e1){
-			//get stack trace
-			Errors.beginError();	
-			Errors.offsetPoint();
-			e1.printStackTrace(System.out);
+			if (Flags.verboseOn) {
+				Errors.beginError();	
+				Errors.offsetPoint();
+				e1.printStackTrace(System.out);
+				mainStuff.mainMenu();
+			}
 			mainStuff.mainMenu();
 		}	
 		mainStuff.mainMenu();
