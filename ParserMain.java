@@ -1,5 +1,6 @@
 package a2;
 
+import java.net.*;
 import java.util.*;
 import java.util.jar.*;
 import java.util.zip.*;
@@ -27,34 +28,40 @@ public class ParserMain {
 				Flags.setVerbose(true);
 				System.out.println("Running in verbose mode...");		
 				if (jarValid(args[1])) {
-					JarFile jarFile = new JarFile(args[1]);
-					Enumeration allEntries = jarFile.entries();
-					while (allEntries.hasMoreElements()) {
-						JarEntry entry = (JarEntry) allEntries.nextElement();
-						String name = entry.getName();
-						System.out.println(name);
-					}					
-					mainStuff.mainMenu();
+					if (args.length == 2) {
+						if (classValid(args[1], "Commands")) {
+							mainStuff.mainMenu();
+						} else {
+							System.out.println("Could not find class: Commands");
+						}
+					} else {
+						if (classValid(args[1], args[2])) {
+							mainStuff.mainMenu();
+						} else {
+							System.out.println("Could not find class: " + args[2]);
+						}
+					}
 				} else {
 					System.out.println("Could not find jar file: " + args[1]);
-					// Do proper error handling here
-					// synopsis();
 				}
 			} else if ((args[0].contains(".jar") && args.length == 2) || (args[0].contains(".jar") && args.length == 1)) {
 				Flags.setVerbose(false);
-				if (jarValid(args[1])) {
-					JarFile jarFile = new JarFile(args[1]);
-					Enumeration allEntries = jarFile.entries();
-					while (allEntries.hasMoreElements()) {
-						JarEntry entry = (JarEntry) allEntries.nextElement();
-						String name = entry.getName();
-						System.out.println(name);
-					}					
-					mainStuff.mainMenu();
+				if (jarValid(args[0])) {
+					if (args.length == 1) {
+						if (classValid(args[0], "Commands")) {
+							mainStuff.mainMenu();
+						} else {
+							System.out.println("Could not find class: " + args[2]);
+						}
+					} else {
+						if (classValid(args[0], args[1])) {
+							mainStuff.mainMenu();
+						} else {
+							System.out.println("Could not find class: " + args[2]);
+						}
+					}
 				} else {
-					System.out.println("Could not find jar file: " + args[1]);
-					// Do proper error handling here
-					// synopsis();
+					System.out.println("Could not find jar file: " + args[0]);
 				}
 			} else {
 				inputAsArray = args[0].toCharArray();
@@ -73,7 +80,7 @@ public class ParserMain {
 			e1.printStackTrace(System.out);
 			mainStuff.mainMenu();
 		}	
-		mainStuff.mainMenu();
+		//mainStuff.mainMenu();
 		
     }
 	
@@ -120,10 +127,10 @@ public class ParserMain {
 	}
 	
 	// Based on one of the answers from http://stackoverflow.com/questions/20152195/how-to-check-if-a-jar-file-is-valid
-	public static boolean jarValid(String jarFile) {
+	public static boolean jarValid(String jarName) {
 		try {
-	        JarFile file = new JarFile(jarFile);
-	        Enumeration<? extends ZipEntry> e = file.entries();
+	        JarFile jarFile = new JarFile(jarName);
+	        Enumeration<? extends ZipEntry> e = jarFile.entries();
 	        while(e.hasMoreElements()) {
 	            ZipEntry entry = e.nextElement();
 	            //System.out.println(entry.getName());
@@ -134,5 +141,29 @@ public class ParserMain {
 	    }
 	}
 	
+	// Based on one of the answers from http://stackoverflow.com/questions/11016092/how-to-load-classes-at-runtime-from-a-folder-or-jar
+	public static boolean classValid(String jarName, String className) {
+		try {
+			JarFile jarFile = new JarFile(jarName);
+			Enumeration e = jarFile.entries();
+			URL[] urls = { new URL("jar:file:" + jarName + "!/") };
+			URLClassLoader cl = URLClassLoader.newInstance(urls);
+		    while (e.hasMoreElements()) {
+		        JarEntry je = (JarEntry) e.nextElement();
+		        if(je.isDirectory() || !je.getName().endsWith(".class")){
+		            continue;
+		        }
+		        // -6 because of .class
+		        String classes = je.getName().substring(0,je.getName().length()-6);
+		        classes = classes.replace('/', '.');
+		        if(classes.equals(className)) {
+		        	return true;
+		        }
+		    }
+		    return false;
+		} catch(Exception ex) {
+			return false;
+		}
+	}
 	
 }
