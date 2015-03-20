@@ -8,6 +8,7 @@ public class ParserMain {
 		InCompiler mainStuff = new InCompiler();
 		LoadJarClass load = new LoadJarClass();
 		
+		//This block of code is imbedded in a try catch to keep track of non-fatal errors
 		try {
 			Scanner input = new Scanner(System.in);	
 			char[] inputAsArray = null;
@@ -50,14 +51,19 @@ public class ParserMain {
 				}
 			}
 		} catch (Throwable e1){
+			//If verbose is on it will print ut the stack trace of the given error 
 			if (Flags.verboseOn) {
-				Errors.beginError();	
-				Errors.offsetPoint();
+				//begins error
+				Errors.beginError();
+				//prints out specified stack trace from the given error
 				e1.printStackTrace(System.out);
+				//returns back to normal execution
 				mainStuff.mainMenu();
 			}
+			//returns back to normal execution if verbose mode is off 
 			mainStuff.mainMenu();
-		}	
+		}
+		//otherwise returns back to normal execution
 		mainStuff.mainMenu();
 		
     }
