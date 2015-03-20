@@ -27,15 +27,15 @@ public class ParserMain {
 					|| (args[0].equals("-v") || args[0].equals("--verbose")) && args[1].contains(".jar") && args.length == 2){
 				Flags.setVerbose(true);
 				System.out.println("Running in verbose mode...");		
-				if (jarValid(args[1])) {
-					if (args.length == 2) {
+				if (jarValid(args[1])) { // Check if jar file is valid
+					if (args.length == 2) {  // Check if defaulted "Commands" class is in the jar file
 						if (classValid(args[1], "Commands")) {
 							mainStuff.mainMenu();
 						} else {
 							System.out.println("Could not find class: Commands");
 						}
 					} else {
-						if (classValid(args[1], args[2])) {
+						if (classValid(args[1], args[2])) { // Check if class argument is in the jar file
 							mainStuff.mainMenu();
 						} else {
 							System.out.println("Could not find class: " + args[2]);
@@ -46,15 +46,15 @@ public class ParserMain {
 				}
 			} else if ((args[0].contains(".jar") && args.length == 2) || (args[0].contains(".jar") && args.length == 1)) {
 				Flags.setVerbose(false);
-				if (jarValid(args[0])) {
-					if (args.length == 1) {
+				if (jarValid(args[0])) { // Check if jar file is valid
+					if (args.length == 1) { // Check if defaulted "Commands" class is in the jar file
 						if (classValid(args[0], "Commands")) {
 							mainStuff.mainMenu();
 						} else {
 							System.out.println("Could not find class: " + args[2]);
 						}
 					} else {
-						if (classValid(args[0], args[1])) {
+						if (classValid(args[0], args[1])) { // Check if class argument is in the jar file
 							mainStuff.mainMenu();
 						} else {
 							System.out.println("Could not find class: " + args[2]);
@@ -126,7 +126,12 @@ public class ParserMain {
 		return; 
 	}
 	
-	// Based on one of the answers from http://stackoverflow.com/questions/20152195/how-to-check-if-a-jar-file-is-valid
+	/**
+	 * Checks if jar file is in the class path and is valid
+	 * @param jarName is the name of the jar file
+	 * @return true if jar file is acceptable, false otherwise
+	 * Based on one of the answers from http://stackoverflow.com/questions/20152195/how-to-check-if-a-jar-file-is-valid
+	 */
 	public static boolean jarValid(String jarName) {
 		try {
 	        JarFile jarFile = new JarFile(jarName);
@@ -141,7 +146,12 @@ public class ParserMain {
 	    }
 	}
 	
-	// Based on one of the answers from http://stackoverflow.com/questions/11016092/how-to-load-classes-at-runtime-from-a-folder-or-jar
+	/**
+	 * Checks if class is in the jar file and is valid
+	 * @param jarName is the name of the jar file, className is the name of the class
+	 * @return true if class is acceptable, false otherwise
+	 * Based on one of the answers from http://stackoverflow.com/questions/11016092/how-to-load-classes-at-runtime-from-a-folder-or-jar
+	 */
 	public static boolean classValid(String jarName, String className) {
 		try {
 			JarFile jarFile = new JarFile(jarName);
