@@ -1,7 +1,5 @@
 package a2;
 
-import java.util.*;
-
 /*
 Purpose of class: 
 When an error is found, print out error message then revert back to program
@@ -25,35 +23,57 @@ public class Errors {
 	//trees is needed to check if input is a funcall in order to get the offset line pointer 
 	static Trees trees = new Trees();
 
-	//getters and setters for error handling
-	//offset determines where the offset line pointer has found the issue
+	static int offset = 0;
+	static String func = null;
+		
+	/**
+	 * Getters and setters for error handling
+	 * The offset determines where the offset line pointer has found the issue
+	 * @return the offset previously determined/set
+	 */
 	public static int getOffset() {
-		int offset = 0; 
 		return offset;
 	}
-	//having access to the input is also important in the error print-out
+	
+	/**
+	 * Having access to the input is also important in the error print-out
+	 * @return
+	 */
 	public static String getInput() {
-		String func = null; 
 		return func;
 	}
-	//sets offset when error is found 
+	
+	
+	/**
+	 * Will set the offset when an error is found. 
+	 * @param newOffset the new offset where an error has occurred.
+	 */
 	public static void setOffset(int newOffset) {
-		int offset = newOffset;
+		offset = newOffset;
 	}
-	//sets new input when error is found 
+	
+	/**
+	 * Will set a new input when an error is found.
+	 * @param newInput the input of what the user inputted where an error has occurred.
+	 */
 	public static void setInput(String newInput) {
-		String input = newInput;
+		func = newInput;
 	}
 
-	//This is the beginning message of the error handle. Printing out the input, matching with the corresponding offset
+	
+	/**
+	 * This is the beginning message of the error handle. Printing out the input, matching with the corresponding offset
+	 */
 	public static void beginError (){		
 		System.out.println("Matching function for '" + getInput() + "' not found at offset " + getOffset() + "\n"
 				+ getInput());
 		//offsetPoint prints out the corresponding offset line print
 		offsetPoint();
-		return;
 	}
 
+	/**
+	 * This basically just cuts off the error input with the error message
+	 */
 	public static void offsetPoint(){
 		//starts with a -, null was having errors but essentially this is the start of the offset pointer 
 		String s = "-";	
@@ -62,6 +82,5 @@ public class Errors {
 			s.concat("-"); // concat the the line
 		}	
 		s.concat("^"); // end off with a hat !
-		return;
 	}
 }
