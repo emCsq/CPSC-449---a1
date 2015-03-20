@@ -1,16 +1,28 @@
 package a2;
 
-import java.util.*;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Enumeration;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
 
 public class ParserMain {
 
+	/**
+	 * The start of the entire program. This evaluates the user input from the command line 
+	 * and will determine what the program will do next. Possible program run results include:
+	 * - return some sort of error with the input, print use synopsis and exit
+	 * - run compiler 
+	 * - print out help in case user does not know how to properly use/enter the program
+	 * @param args the command line arguments that 
+	 */
 	public static void main (String [] args){
 		InCompiler mainStuff = new InCompiler();
 		LoadJarClass load = new LoadJarClass();
 		
 		//This block of code is imbedded in a try catch to keep track of non-fatal errors
 		try {
-			Scanner input = new Scanner(System.in);	
 			char[] inputAsArray = null;
 	
 			if (args.length == 0) {
@@ -94,45 +106,15 @@ public class ParserMain {
     }
 	
 
+	/**
+	 * The synopsis of what the jar file/program as a whole does in terms of commands that
+	 * can be entered to run the program.
+	 */
 	public static void synopsis() {
 		System.out.println("Synopsis:\n  methods\n  methods { -h | -? | --help }+\n  methods {-v --verbose}* <jar-file> [<class-name>]");
 		System.out.println("Arguments:\n  <jar-file>:   The .jar file that contains the class to load (see next line).\n  <class-name>: The fully qualified class name containing public static command methods to call. [Default=\"Commands\"]");
 		System.out.println("Qualifiers:\n  -v --verbose: Print out detailed errors, warnings, and tracking.\n  -h -? --help: Print out a detailed help message.");
 		System.out.println("Single-char qualifiers may be grouped; long qualifiers may be truncated to unique prefixes and are not case sensitive.");
-		return;
-	}
-	
-	
-	public static void functions() {
-		System.out.println("Function List:\n"
-				+ "(add string string) : string\n"
-				+ "(add float float) : float\n"
-				+ "(add int int) : int\n"
-				+ "(sub float float) : float\n"
-				+ "(sub int int) : int\n"
-				+ "(div int int) : int\n"
-				+ "(div float float) : float\n"
-				+ "(mul float float) : float\n"
-				+ "(mul int int) : int\n"
-				+ "(inc float) : float\n"
-				+ "(inc int) : int\n"
-				+ "(dec int) : int\n"
-				+ "(dec float) : float\n"
-				+ "(len string) : int\n");
-		return;
-	}
-		
-	public static void nonFatalError() {
-		// whatever is enclosed by the <>, will be changed later once we get the logic to do so
-		// will update for the future 
-		System.out.println("Matching function for <function type> not found at offset <offset-number>\n"
-				+ "<specific function>\n"
-				+ "-----------^\n"
-				+ "\n java.text.ParseException: Matching function for <function type> not found\n"
-				+ "\t at Excecution.execute(Execution)"
-				+ "\t at Method.<init>(Method)"
-				+ "\t at Method.main(Methods.blah)");
-		return; 
 	}
 	
 	/**
