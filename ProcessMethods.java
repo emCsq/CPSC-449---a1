@@ -4,14 +4,16 @@ public class ProcessMethods {
 	
 	public Trees tree;
 	public Functions function;
+	public UseCommands command;
 	
 	public ProcessMethods() {
 		function = new Functions();
 		tree = new Trees();
+		command = new UseCommands();
 	}
 	
 	// trying to break cases like  (add 3 5), (add 3 (mul 3 2)), (add (mul 3 2) 3), and (add (mul 3 2) (mul 2 4))
-	public String invalidFunc(String userIn) {
+	public String invalidFunc(String userIn) throws NumberFormatException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 	String[] inArray = userIn.split(" ");
 	if (inArray[0] != "(add" || inArray[0] != "(sub" || inArray[0] != "(mul" || inArray[0] != "(div" || inArray[0] != "(len" || inArray[0] != "(dec") {
 		if (inArray[1] != Trees.this.isString(userIn)) {
@@ -44,7 +46,7 @@ public class ProcessMethods {
 			} else if (((arg1_Float == true) && (arg2_Integer == true)) || ((arg1_Integer == true) && (arg2_Float == true))) {
 				System.out.println("Incorrect argument types.");
 			} else if ((arg1_String == true) && (arg2_String == true)) {
-				concatResult = this.processStringConcat(inArray[1], inArray[2]);
+				concatResult = this.processStringConcat(inArray[0], inArray[1], inArray[2]);
 			} else {
 				System.out.println("Unexpected character encountered at offset."); //temp
 			}
@@ -58,7 +60,7 @@ public class ProcessMethods {
 			} else if (arg1_Float == true) {
 				floatResult = this.processOneFloat(inArray[0], Float.parseFloat(inArray[1]));
 			} else if ((inArray[0].compareTo("len") == 0) && arg1_String == true) {
-				stringLength = this.processStringLength(inArray[1]);
+				stringLength = this.processStringLength(inArray[0], inArray[1]);
 			} else {
 				System.out.println("Unexpected character encountered at offset."); //temp
 			}
@@ -91,84 +93,97 @@ public class ProcessMethods {
 		}		
 		
 		if (funct.compareTo("add") == 0) {
-			return function.add(arg1, arg2);
+//			return function.add(arg1, arg2);
+			return command.useTwoIntCommand(funct, arg1, arg2);
 		} else if (funct.compareTo("sub") == 0) {
-			return function.sub(arg1, arg2);
+//			return function.sub(arg1, arg2);
+			return command.useTwoIntCommand(funct, arg1, arg2);
 		} else if (funct.compareTo("div") == 0) {
-			return function.div(arg1, arg2);
+//			return function.div(arg1, arg2);
+			return command.useTwoIntCommand(funct, arg1, arg2);
 		} else if (funct.compareTo("mul") == 0) {
-			return function.mul(arg1, arg2);
+//			return function.mul(arg1, arg2);
+			return command.useTwoIntCommand(funct, arg1, arg2);
 		} else {
 			return 123456789;
 		}
 	}
 	
-	public int processOneInteger(String funct, int arg1) {
+	public int processOneInteger(String funct, int arg1) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
 			System.out.println("<<< processOneInteger() >>>");
 		}
 		
 		if (funct.compareTo("inc") == 0) {
-			return function.inc(arg1);
+//			return function.inc(arg1);
+			return command.useOneIntCommand(funct, arg1);
 		} else if (funct.compareTo("dec") == 0) {
-			return function.dec(arg1);
+//			return function.dec(arg1);
+			return command.useOneIntCommand(funct, arg1);
 		} else {
 			return 123456789;
 		}
 	}	
 	
-	public float processTwoFloats(String funct, float arg1, float arg2) {
+	public float processTwoFloats(String funct, float arg1, float arg2) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
 			System.out.println("<<< processTwoFloats() >>>");
 		}
 		
 		if (funct.compareTo("add") == 0) {
-			return function.add(arg1, arg2);
+//			return function.add(arg1, arg2);
+			return command.useTwoFltCommand(funct, arg1, arg2);
 		} else if (funct.compareTo("sub") == 0) {
-			return function.sub(arg1, arg2);
+//			return function.sub(arg1, arg2);
+			return command.useTwoFltCommand(funct, arg1, arg2);
 		} else if (funct.compareTo("div") == 0) {
-			return function.div(arg1, arg2);
+//			return function.div(arg1, arg2);
+			return command.useTwoFltCommand(funct, arg1, arg2);
 		} else if (funct.compareTo("mul") == 0) {
-			return function.mul(arg1, arg2);
+//			return function.mul(arg1, arg2);
+			return command.useTwoFltCommand(funct, arg1, arg2);
 		} else {
 			return 123456789;
 		}
 	}
 	
-	public float processOneFloat(String funct, float arg1) {
+	public float processOneFloat(String funct, float arg1) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
 			System.out.println("<<< processOneFloat() >>>");
 		}
 		
 		if (funct.compareTo("inc") == 0) {
-			return function.inc(arg1);
+//			return function.inc(arg1);
+			return command.useOneFltCommand(funct, arg1);
 		} else if (funct.compareTo("dec") == 0) {
-			return function.dec(arg1);
+//			return function.dec(arg1);
+			return command.useOneFltCommand(funct, arg1);
 		} else {
 			return 123456789;
 		}
 	}	
 	
-	public String processStringConcat(String arg1, String arg2) {
+	public String processStringConcat(String funct, String arg1, String arg2) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
 			System.out.println("<<< processStringConcat() >>>");
 		}
 		
-		return function.add(arg1, arg2);
+//		return function.add(arg1, arg2);
+		return command.useStrCommand(funct, arg1, arg2);
 	}
 	
-	public int processStringLength(String arg1) {
+	public int processStringLength(String funct, String arg1) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
 			System.out.println("<<< processStringLength() >>>");
 		}
 		
-		return function.len(arg1);
+//		return function.len(arg1);
+		return command.useLenCommand(funct, arg1);
 	}
-	
 	
 }
