@@ -24,12 +24,12 @@ public class ParserMain {
 			} else if (args[0].equals("-v") || args[0].equals("--verbose")) {
 				Flags.setVerbose(true); //sets verbose mode in action
 				System.out.println("Running in verbose mode...");		
-				if ((args[1].contains(".jar"))) {			/* the args[1] (aka the jar file) is valid */
+				if ((args[1].contains(".jar"))) { /* TO ADD HERE - Kyle's stuff!! // the args[1] (aka the jar file) is valid */
 					if (true) {			/* valid, check if the args[2] (aka the class) is valid */
-						/* if args[2] is valid, ~ENTER COMPILER PROGRAM~
-						MORE TO DO HERE!! */
-						
-						load.load(args[1], args[2]);
+						/* if args[2] is valid, ~ENTER COMPILER PROGRAM~ */
+					
+						//This will load the .jar file from arg[1] and load the classes from arg[2] in the .jar file
+						load.loadJC(args[1], args[2]);
 					
 						mainStuff.mainMenu();
 					} else {
