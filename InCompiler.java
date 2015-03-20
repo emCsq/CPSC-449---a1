@@ -1,12 +1,3 @@
-/**
- * @author Emily Chow		10103742
- * @author Shelly Sicat		10078650
- * @author Angela Sicat		10058190
- * @author Sartaj Hargopal Singh Hundal		10032181
- * @author Jeremy Kyle Delima	10109442
- * 
- * */
-
 package a2;
 
 import java.util.Scanner;
