@@ -1,12 +1,15 @@
 package a2;
 public class Trees {
-
 	
 	public Trees() {
 		
 	}
 	
-	// expr	:=	funcall | value
+	/**
+	 * expr	:=	funcall | value
+	 * @param a expression to be evaluated
+	 * @return a boolean value indicating whether it is a valid expression or not
+	 */
 	public boolean expr(String a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -18,7 +21,11 @@ public class Trees {
 		return false;
 	}
 	
-	// funcall	:=	( identifier { expr }* )
+	/**
+	 * funcall	:=	( identifier { expr }* )
+	 * @param a the function call to be evaluated
+	 * @return a boolean value indicating whether it is a valid function call or not
+	 */
 	public boolean funcall(String a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -37,7 +44,11 @@ public class Trees {
 	}
 	
 	
-	// identifier	:=	alpha { alphanum }*
+	/**
+	 * identifier	:=	alpha { alphanum }*
+	 * @param a the item to be identified
+	 * @return a boolean value indicating whether or not the input is an identifier
+	 */
 	public boolean identifier(String a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -55,7 +66,11 @@ public class Trees {
 		return true;
 	}
 	
-	// value	:=	integer | float | string
+	/**
+	 * value	:=	integer | float | string
+	 * @param a the input to be determined if it is a value or not
+	 * @return a boolean value indicating whether or not the input is a value
+	 */
 	public boolean value(String a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -67,7 +82,11 @@ public class Trees {
 		return false;
 	}
 	
-	// integer :=	sign { digit }+ { . }~
+	/**
+	 * integer :=	sign { digit }+ { . }~
+	 * @param a a string that is to be determined whether or not is an integer
+	 * @return a boolean value indicating whether or not the input is an integer
+	 */
 	public boolean isInteger(String a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -83,7 +102,11 @@ public class Trees {
 		return false;
 	}
 	
-	// float :=	sign { digit }+ .  { digit }*
+	/**
+	 * float :=	sign { digit }+ .  { digit }*
+	 * @param a a string that is to be determined whether or not is a float
+	 * @return a boolean value indicating whether or not the input is a float
+	 */
 	public boolean isFloat(String a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -106,7 +129,11 @@ public class Trees {
 		return false;
 	}
 
-	// string := " { char }* "
+	/**
+	 * string := " { char }* "
+	 * @param a a string that is to be determined whether or not is a string
+	 * @return a boolean value indicating whether or not the input is a string
+	 */
 	public boolean isString(String a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -124,7 +151,11 @@ public class Trees {
 		return true;
 	}	
 	
-	// alpha := a..z|A..Z|_
+	/**
+	 * alpha := a..z|A..Z|_
+	 * @param a a string that is to be determined whether or not is a letter
+	 * @return a boolean value indicating whether or not the input is a letter
+	 */
 	public boolean alpha(String a) {
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -138,7 +169,11 @@ public class Trees {
 			return false;	
 	}
 	
-	// alphanum := alpha|digit
+	/**
+	 * alphanum := alpha|digit
+	 * @param a a string that is to be determined whether or not is a letter or digit
+	 * @return a boolean value indicating whether or not the input is a letter or digit
+	 */
 	public boolean alphaNum(String a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -150,7 +185,11 @@ public class Trees {
 		return false;
 	}
 	
-	// char := <any character>
+	/**
+	 * char := <any character>
+	 * @param a a string that is to be determined whether or not is a char
+	 * @return a boolean value indicating whether or not the input is a char
+	 */
 	public boolean isChar(char a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -163,7 +202,11 @@ public class Trees {
 		return false;
 	}
 	
-	// sign := nothing|+|-
+	/**
+	 * sign := nothing|+|-
+	 * @param a a string that is to be determined whether or not is a sign
+	 * @return a boolean value indicating whether or not the input is a sign
+	 */
 	public boolean sign(char a) {
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -179,7 +222,11 @@ public class Trees {
 		}
 	}
 	
-	// digit := 0..9
+	/**
+	 * digit := 0..9
+	 * @param a a string that is to be determined whether or not is a digit
+	 * @return a boolean value indicating whether or not the input is a digit
+	 */
 	public boolean digit(String a) {
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
@@ -193,7 +240,11 @@ public class Trees {
 			return false;
 	}
 	
-	// whitespace := {''|tab}+
+	/**
+	 * whitespace := {''|tab}+
+	 * @param a a string that is to be determined whether or not is any sort of whitespace
+	 * @return a boolean value indicating whether or not the input is any sort of whitespace
+	 */
 	public boolean whiteSpace(String a){
 		//if verbose is on, track code
 		if (Flags.verboseOn) {
