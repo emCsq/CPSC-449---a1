@@ -1,6 +1,6 @@
 package a2;
 
-/*
+/**
 The sole purpose of this class is track if the program is in 
 verbose mode or has encountered a non-fatal error.
 */
