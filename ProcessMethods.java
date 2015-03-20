@@ -29,14 +29,24 @@ public class ProcessMethods {
 			arg2_String = tree.isString(inArray[2]);	//check if arg2 is a String 	
 
 			if ((arg1_Integer == true) && (arg2_Integer == true)) {
+				countOffset += 3;
+				Errors.setOffset(countOffset);
 				intResult = this.processTwoIntegers(inArray[0], Integer.parseInt(inArray[1]), Integer.parseInt(inArray[2]));
 			} else if ((arg1_Float == true) && (arg2_Float == true)) {
+				countOffset += 3;
+				Errors.setOffset(countOffset);
 				floatResult = this.processTwoFloats(inArray[0], Float.parseFloat(inArray[1]), Float.parseFloat(inArray[2]));
 			} else if (((arg1_Float == true) && (arg2_Integer == true)) || ((arg1_Integer == true) && (arg2_Float == true))) {
+				countOffset -= 3;
+				Errors.setOffset(countOffset);
 				System.out.println("Incorrect argument types.");
 			} else if ((arg1_String == true) && (arg2_String == true)) {
+				countOffset += 3;
+				Errors.setOffset(countOffset);
 				concatResult = this.processStringConcat(inArray[0], inArray[1], inArray[2]);
 			} else {
+				countOffset -= 3;
+				Errors.setOffset(countOffset);
 				System.out.println("Unexpected character encountered at offset."); //temp
 			}
 		} else if (inArray.length == 2) {	//function arg1
@@ -45,12 +55,20 @@ public class ProcessMethods {
 			arg1_String = tree.isString(inArray[1]);
 			
 			if (arg1_Integer == true) {
+				countOffset += 2;
+				Errors.setOffset(countOffset);
 				intResult = this.processOneInteger(inArray[0], Integer.parseInt(inArray[1]));
 			} else if (arg1_Float == true) {
+				countOffset += 2;
+				Errors.setOffset(countOffset);
 				floatResult = this.processOneFloat(inArray[0], Float.parseFloat(inArray[1]));
 			} else if ((inArray[0].compareTo("len") == 0) && arg1_String == true) {
+				countOffset += 2;
+				Errors.setOffset(countOffset);
 				stringLength = this.processStringLength(inArray[0], inArray[1]);
 			} else {
+				countOffset -= 2;
+				Errors.setOffset(countOffset);
 				System.out.println("Unexpected character encountered at offset."); //temp
 			}
 		}
