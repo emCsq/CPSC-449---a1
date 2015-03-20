@@ -131,17 +131,16 @@ public class ParserMain {
 	 */
 	public static boolean jarValid(String jarName) {
 		try {
-	        JarFile jarFile = new JarFile(jarName);
-	        Enumeration<? extends ZipEntry> e = jarFile.entries();
-	        while(e.hasMoreElements()) {
-	            ZipEntry entry = e.nextElement();
-	            //System.out.println(entry.getName());
-	        }
-	        return true;
-	    } catch(Exception ex) {
-	        return false;
-	    }
-	}
+		        JarFile jarFile = new JarFile(jarName); // Creates jarfile from parameter
+		        Enumeration<? extends ZipEntry> e = jarFile.entries(); // Creates entries from the jarfile
+		        while(e.hasMoreElements()) { // Loop of entries in the jarfile
+		            ZipEntry entry = e.nextElement();
+		        }
+		        return true; // Successful creation of jarfile elements returns true
+		} catch(Exception ex) {
+		        return false; // Otherwise exceptions occur so we simply return false
+		    }
+		}
 	
 	/**
 	 * Checks if class is in the jar file and is valid
@@ -151,25 +150,24 @@ public class ParserMain {
 	 */
 	public static boolean classValid(String jarName, String className) {
 		try {
-			JarFile jarFile = new JarFile(jarName);
-			Enumeration e = jarFile.entries();
-			URL[] urls = { new URL("jar:file:" + jarName + "!/") };
-			URLClassLoader cl = URLClassLoader.newInstance(urls);
-		    while (e.hasMoreElements()) {
-		        JarEntry je = (JarEntry) e.nextElement();
-		        if(je.isDirectory() || !je.getName().endsWith(".class")){
+			JarFile jarFile = new JarFile(jarName); // Creates jarfile from parameter
+			Enumeration e = jarFile.entries(); // Creates entries from the jarfile
+			URL[] urls = { new URL("jar:file:" + jarName + "!/") }; // Creates jarfile URL
+			URLClassLoader cl = URLClassLoader.newInstance(urls); // Creates classloader
+		    while (e.hasMoreElements()) { // Loop of all classes from the jarfile
+		        JarEntry je = (JarEntry) e.nextElement(); // Jarfile entries
+		        if(je.isDirectory() || !je.getName().endsWith(".class")){ // Checks only for classes
 		            continue;
 		        }
-		        // -6 because of .class
-		        String classes = je.getName().substring(0,je.getName().length()-6);
-		        classes = classes.replace('/', '.');
-		        if(classes.equals(className)) {
-		        	return true;
+		        String classes = je.getName().substring(0,je.getName().length()-6); // Gets class name
+		        classes = classes.replace('/', '.'); // Replaces slashes to periods to access class name
+		        if(classes.equals(className)) { // Checks if the current class name is the same as the class name argument
+		        	return true; // Returns true if argument class name exists
 		        }
 		    }
-		    return false;
+		    return false; // Otherwise we return false because class name argument is not found
 		} catch(Exception ex) {
-			return false;
+			return false; // If exceptions somehow occur we return false
 		}
 	}
 	
