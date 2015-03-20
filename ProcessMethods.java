@@ -12,17 +12,6 @@ public class ProcessMethods {
 		command = new UseCommands();
 	}
 	
-	// trying to break cases like  (add 3 5), (add 3 (mul 3 2)), (add (mul 3 2) 3), and (add (mul 3 2) (mul 2 4))
-	public String invalidFunc(String userIn) throws NumberFormatException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-	String[] inArray = userIn.split(" ");
-	if (inArray[0] != "(add" || inArray[0] != "(sub" || inArray[0] != "(mul" || inArray[0] != "(div" || inArray[0] != "(len" || inArray[0] != "(dec") {
-		if (inArray[1] != Trees.this.isString(userIn)) {
-			
-		}
-	}
-		return userIn;
-	}
-	
 	public String timeToEvaluateStuff (String userIn) {
 		String concatResult = "";
 		int stringLength = -9999999;
