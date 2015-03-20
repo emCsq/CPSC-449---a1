@@ -22,79 +22,46 @@ public class Errors {
 	
 	//errors should continue with the program from Main
 	static InCompiler main = new InCompiler();
+	//trees is needed to check if input is a funcall in order to get the offset line pointer 
 	static Trees trees = new Trees();
-	
-	public Errors() {
-		int offset = 0; 
-		String func = null;
-		Exception e = null;
-	}
 
+	//getters and setters for error handling
+	//offset determines where the offset line pointer has found the issue
 	public static int getOffset() {
 		int offset = 0; 
 		return offset;
 	}
-
+	//having access to the input is also important in the error print-out
 	public static String getInput() {
 		String func = null; 
 		return func;
 	}
-
+	//sets offset when error is found 
 	public static void setOffset(int newOffset) {
 		int offset = newOffset;
 	}
-	
+	//sets new input when error is found 
 	public static void setInput(String newInput) {
 		String input = newInput;
 	}
 
-	public static void beginError (){
-		//if verbose is on, track code
-		if (Flags.verboseOn) {
-			System.out.println("<<< beginError() >>>"
-			+ "Non-Fatal Error encountered");
-		}
-		
+	//This is the beginning message of the error handle. Printing out the input, matching with the corresponding offset
+	public static void beginError (){		
 		System.out.println("Matching function for '" + getInput() + "' not found at offset " + getOffset() + "\n"
 				+ getInput());
+		//offsetPoint prints out the corresponding offset line print
+		offsetPoint();
 		return;
 	}
-	
-	
-	@SuppressWarnings("null")
+
 	public static void offsetPoint(){
-		String s = null;
-		if (trees.funcall(getInput()) == true){
-			return;
-		} else {			
-			for (int i=0; i<getOffset(); i++){
-				s.concat("-");
-			}	
-			s.concat("-");
-		}
-	
+		//starts with a -, null was having errors but essentially this is the start of the offset pointer 
+		String s = "-";	
+		//this for loop creates a line of dash's (using the offset) to point to point of error
+		for (int i=0; i<getOffset(); i++){ 
+			s.concat("-"); // concat the the line
+		}	
+		s.concat("^"); // end off with a hat !
 		return;
 	}
-	
-	/*
-	public static void errorCatch(Exception e) throws Exception {
-		boolean nonFatalError = true;	
-		
-		try {			
-			beginError();	
-			offsetPoint();
-			//Take out once you get the actual error given
-			if (nonFatalError){
-				throw new Exception();
-			}	
-		} catch (Throwable e1){
-			//get stack trace
-			beginError();	
-			offsetPoint();
-			e1.printStackTrace(System.out);
-			main.mainMenu();
-		}	
-		main.mainMenu();
-	}*/
-	
 }
